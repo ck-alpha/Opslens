@@ -1,0 +1,63 @@
+{
+  "metric_id": "net_aov",
+  "name": "净客单价",
+  "aliases": [
+    "Net AOV",
+    "AOV",
+    "客单价"
+  ],
+  "description": "同一成交订单 cohort 净 GMV 除以成交订单数。分母为零时结果为 NULL。",
+  "version": "1.0",
+  "status": "ACTIVE",
+  "metric_type": "DERIVED",
+  "unit": "CNY",
+  "expression": "net_gmv / paid_order_count",
+  "dependencies": [
+    "net_gmv",
+    "paid_order_count"
+  ],
+  "source_tables": [
+    "order_items",
+    "orders",
+    "refunds"
+  ],
+  "source_columns": [
+    "orders.order_id",
+    "orders.order_status",
+    "orders.paid_at",
+    "order_items.order_id",
+    "order_items.quantity",
+    "order_items.unit_price",
+    "order_items.discount_amount",
+    "refunds.order_id",
+    "refunds.refund_status",
+    "refunds.refund_amount"
+  ],
+  "time_semantics": {
+    "time_column": "orders.paid_at",
+    "timezone": "Asia/Shanghai",
+    "default_grain": "month",
+    "allowed_grains": [
+      "day",
+      "week",
+      "month"
+    ]
+  },
+  "filters": [
+    {
+      "column": "orders.order_status",
+      "operator": "IN",
+      "value": [
+        "paid",
+        "completed"
+      ]
+    }
+  ],
+  "allowed_dimensions": [
+    "orders.region",
+    "channels.channel_name",
+    "channels.channel_type"
+  ],
+  "refund_policy": "AFTER_APPROVED_REFUND",
+  "owner": "OpsLens 合成业务团队"
+}

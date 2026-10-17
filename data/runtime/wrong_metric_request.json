@@ -1,0 +1,16 @@
+{
+  "candidate_sql": "SELECT SUM(i.quantity*i.unit_price) AS value FROM order_items i JOIN orders o ON i.order_id=o.order_id WHERE o.order_status IN ('paid','completed')",
+  "validation_mode": "METRIC_ANALYSIS",
+  "metric_ref": {
+    "metric_id": "gross_gmv",
+    "version": "1.0",
+    "output_columns": [
+      "value"
+    ]
+  },
+  "intent": {
+    "metric_id": "gross_gmv",
+    "metric_version": "1.0",
+    "metric_output_column": "value"
+  }
+}

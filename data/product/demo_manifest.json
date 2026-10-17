@@ -1,0 +1,10 @@
+{
+  "seed": 20260910,
+  "table_fingerprints": {
+    "channels": "8e3340da770cdf8ac3e20f357e22eeba1fce15079b027b038c44e06b6648d6cc",
+    "products": "aee89ef8e51a590d586413eff7863fabd0c431bb4ab9a790cdadd6feb5ed7ca4",
+    "orders": "e483226601e50ab9be6aec9ac1879294edff39e3f5c5a183dab2bd76d8ef1d73",
+    "order_items": "f4ab6be0379129a289e9a920bec187ca523cd16beddcc24a520c643e4ab35be8",
+    "refunds": "fbdb54eb5822920484f3d04f9fc9e9032e940ebae9dbe168f8306bc1fd7abff9"
+  }
+}

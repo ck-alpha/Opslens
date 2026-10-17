@@ -1,0 +1,49 @@
+{
+  "metric_id": "paid_order_count",
+  "name": "成交订单数",
+  "aliases": [
+    "Paid Order Count"
+  ],
+  "description": "paid/completed 订单去重计数，按 paid_at 归属；退款不移除成交订单。",
+  "version": "1.0",
+  "status": "ACTIVE",
+  "metric_type": "BASE",
+  "unit": "COUNT",
+  "expression": "COUNT_DISTINCT(orders.order_id)",
+  "dependencies": [],
+  "source_tables": [
+    "orders"
+  ],
+  "source_columns": [
+    "orders.order_id",
+    "orders.order_status",
+    "orders.paid_at"
+  ],
+  "time_semantics": {
+    "time_column": "orders.paid_at",
+    "timezone": "Asia/Shanghai",
+    "default_grain": "month",
+    "allowed_grains": [
+      "day",
+      "week",
+      "month"
+    ]
+  },
+  "filters": [
+    {
+      "column": "orders.order_status",
+      "operator": "IN",
+      "value": [
+        "paid",
+        "completed"
+      ]
+    }
+  ],
+  "allowed_dimensions": [
+    "orders.region",
+    "channels.channel_name",
+    "channels.channel_type"
+  ],
+  "refund_policy": "NOT_APPLICABLE",
+  "owner": "OpsLens 合成业务团队"
+}

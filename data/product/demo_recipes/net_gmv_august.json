@@ -1,0 +1,33 @@
+{
+  "recipe_id": "net_gmv_august",
+  "title": "August Net GMV",
+  "description": "Synthetic demo; paid_at in Asia/Shanghai, [2026-08-01, 2026-09-01). Actual outcome is determined by runtime validation.",
+  "question": "August Net GMV",
+  "category": "VERIFIED_ANALYSIS",
+  "tags": [
+    "synthetic",
+    "august"
+  ],
+  "runtime_request": {
+    "candidate_sql": "WITH gross_total AS (SELECT SUM(i.quantity * i.unit_price - i.discount_amount) AS gross FROM orders o JOIN order_items i ON o.order_id = i.order_id WHERE o.order_status IN ('paid', 'completed') AND o.paid_at >= TIMESTAMP '2026-08-01' AND o.paid_at < TIMESTAMP '2026-09-01'), refund_total AS (SELECT SUM(r.refund_amount) AS refund FROM orders o JOIN refunds r ON o.order_id = r.order_id WHERE o.order_status IN ('paid', 'completed') AND o.paid_at >= TIMESTAMP '2026-08-01' AND o.paid_at < TIMESTAMP '2026-09-01' AND r.refund_status = 'approved') SELECT g.gross - r.refund AS net_gmv FROM gross_total g CROSS JOIN refund_total r",
+    "validation_mode": "METRIC_ANALYSIS",
+    "metric_ref": {
+      "metric_id": "net_gmv",
+      "version": "1.0",
+      "output_columns": [
+        "net_gmv"
+      ]
+    },
+    "intent": {
+      "metric_id": "net_gmv",
+      "metric_version": "1.0",
+      "metric_output_column": "net_gmv",
+      "time_window": {
+        "start": "2026-08-01T00:00:00",
+        "end": "2026-09-01T00:00:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "dimensions": []
+    }
+  }
+}

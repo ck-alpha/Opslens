@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "opslens"
+version = "0.1.0"
+description = "Verifiable operations analysis built on a pinned Lumen runtime"
+requires-python = ">=3.11"
+readme = "README.md"
+license = "MIT"
+dependencies = [
+    "lumen @ git+https://github.com/holoviz/lumen.git@c46a41aec7effba8ada8c41577fcc6432e7eeff3",
+    # Upstream AI ingestion imports httpx but does not declare it.
+    "panel>=1.9.4,<2",
+    "httpx>=0.28.1,<1",
+    "duckdb>=1.5.5,<1.6",
+    "sqlglot>=30.18.0,<30.19",
+    "pydantic>=2.13.5,<3",
+    "SQLAlchemy>=2.0.36,<2.1",
+    "alembic>=1.14,<2",
+    "psycopg[binary]>=3.2,<4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff", "pyright"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/opslens"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.pyright]
+include = ["src/opslens"]
+pythonVersion = "3.11"
+typeCheckingMode = "standard"

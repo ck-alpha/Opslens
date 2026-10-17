@@ -1,0 +1,28 @@
+{"case_id": "report_gross_gmv", "source": "valid_gross_gmv", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_paid_order_count", "source": "valid_paid_order_count", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_approved_refund_amount", "source": "valid_approved_refund_amount", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_refund_order_rate", "source": "valid_refund_order_rate", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_net_gmv", "source": "valid_net_gmv", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_gross_aov", "source": "valid_gross_aov", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_net_aov", "source": "valid_net_aov", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_refund_amount_rate", "source": "valid_refund_amount_rate", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_data_rows", "source": "data_rows", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_data_count", "source": "data_count", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_data_constant", "source": "data_constant", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_data_null", "source": "data_null", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_wrong_sum", "source": "wrong_sum", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_missing_filter", "source": "missing_filter", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_oracle_unavailable", "source": "oracle_unavailable", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_unknown_version", "source": "unknown_version", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_evidence_missing", "source": "evidence_missing", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_deprecated", "source": "deprecated", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_evidence_partial", "source": "evidence_partial", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "report_crash_METRIC", "source": "crash_METRIC", "expected_status": "PASS", "expected_reason": "REPORT_VALID"}
+{"case_id": "adversarial_value", "source": "valid_gross_gmv", "action": "value", "expected_status": "FAIL", "expected_reason": "REPORT_VALUE_MISMATCH"}
+{"case_id": "adversarial_version", "source": "valid_gross_gmv", "action": "version", "expected_status": "FAIL", "expected_reason": "REPORT_OUTPUT_MISMATCH"}
+{"case_id": "adversarial_output", "source": "valid_gross_gmv", "action": "output", "expected_status": "FAIL", "expected_reason": "REPORT_OUTPUT_MISMATCH"}
+{"case_id": "adversarial_status", "source": "valid_gross_gmv", "action": "status", "expected_status": "FAIL", "expected_reason": "REPORT_STATUS_MISMATCH"}
+{"case_id": "adversarial_fingerprint", "source": "valid_gross_gmv", "action": "fingerprint", "expected_status": "FAIL", "expected_reason": "REPORT_FINGERPRINT_MISMATCH"}
+{"case_id": "adversarial_leak", "source": "oracle_unavailable", "action": "leak", "expected_status": "FAIL", "expected_reason": "UNVERIFIED_FACT_LEAK"}
+{"case_id": "adversarial_uncertainty", "source": "oracle_unavailable", "action": "uncertainty", "expected_status": "FAIL", "expected_reason": "UNCERTAINTY_NOT_REPORTED"}
+{"case_id": "adversarial_causal", "source": "valid_gross_gmv", "action": "causal", "expected_status": "FAIL", "expected_reason": "CAUSAL_CLAIM_REQUIRES_CAUSAL_EVIDENCE"}

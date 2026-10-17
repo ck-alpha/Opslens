@@ -1,0 +1,60 @@
+{
+  "metric_id": "gross_gmv",
+  "name": "毛GMV",
+  "aliases": [
+    "毛 GMV",
+    "Gross GMV",
+    "GMV"
+  ],
+  "description": "成交订单商品行金额扣整行优惠，不扣退款；按订单 paid_at 归属。",
+  "version": "1.0",
+  "status": "ACTIVE",
+  "metric_type": "BASE",
+  "unit": "CNY",
+  "expression": "SUM(order_items.quantity * order_items.unit_price - order_items.discount_amount)",
+  "dependencies": [],
+  "source_tables": [
+    "order_items",
+    "orders"
+  ],
+  "source_columns": [
+    "orders.order_id",
+    "orders.order_status",
+    "orders.paid_at",
+    "order_items.order_id",
+    "order_items.quantity",
+    "order_items.unit_price",
+    "order_items.discount_amount",
+    "order_items.product_id"
+  ],
+  "time_semantics": {
+    "time_column": "orders.paid_at",
+    "timezone": "Asia/Shanghai",
+    "default_grain": "month",
+    "allowed_grains": [
+      "day",
+      "week",
+      "month"
+    ]
+  },
+  "filters": [
+    {
+      "column": "orders.order_status",
+      "operator": "IN",
+      "value": [
+        "paid",
+        "completed"
+      ]
+    }
+  ],
+  "allowed_dimensions": [
+    "orders.region",
+    "channels.channel_name",
+    "channels.channel_type",
+    "products.category",
+    "products.brand",
+    "products.product_id"
+  ],
+  "refund_policy": "BEFORE_REFUND",
+  "owner": "OpsLens 合成业务团队"
+}

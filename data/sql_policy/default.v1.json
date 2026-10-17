@@ -1,0 +1,19 @@
+{
+  "policy_id": "opslens_demo_readonly",
+  "version": "1.0",
+  "dialect": "duckdb",
+  "allowed_schemas": ["main"],
+  "allowed_tables": ["orders", "order_items", "refunds", "products", "channels"],
+  "denied_columns": ["orders.customer_id"],
+  "forbidden_functions": ["read_csv", "read_csv_auto", "read_parquet", "read_json", "read_json_auto", "read_blob", "read_text", "glob", "query", "query_table", "sqlite_scan", "postgres_scan", "getenv", "nextval", "setval", "write_log"],
+  "forbidden_table_functions": ["read_csv", "read_parquet", "read_json", "glob", "range", "sqlite_scan", "postgres_scan"],
+  "allow_star_projection": false,
+  "max_result_rows": 1000,
+  "max_joins": 4,
+  "max_ctes": 6,
+  "max_subqueries": 8,
+  "max_table_references": 8,
+  "max_sql_length": 20000,
+  "timeout_seconds": 3.0,
+  "external_access": false
+}

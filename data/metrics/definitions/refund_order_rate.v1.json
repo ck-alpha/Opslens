@@ -1,0 +1,62 @@
+{
+  "metric_id": "refund_order_rate",
+  "name": "退款订单率",
+  "aliases": [
+    "Refund Order Rate",
+    "退款率"
+  ],
+  "description": "同一成交 cohort 中存在 approved 退款的去重订单数除以全部成交订单数；approved 条件仅作用于分子。分母为零时结果为 NULL。",
+  "version": "1.0",
+  "status": "ACTIVE",
+  "metric_type": "DERIVED",
+  "unit": "RATIO",
+  "expression": "COUNT_DISTINCT(orders.order_id WHERE EXISTS approved refunds FOR orders.order_id) / paid_order_count",
+  "dependencies": [
+    "paid_order_count"
+  ],
+  "source_tables": [
+    "orders",
+    "refunds"
+  ],
+  "source_columns": [
+    "orders.order_id",
+    "orders.order_status",
+    "orders.paid_at",
+    "refunds.order_id",
+    "refunds.refund_status",
+    "refunds.refund_amount"
+  ],
+  "time_semantics": {
+    "time_column": "orders.paid_at",
+    "timezone": "Asia/Shanghai",
+    "default_grain": "month",
+    "allowed_grains": [
+      "day",
+      "week",
+      "month"
+    ]
+  },
+  "filters": [
+    {
+      "column": "orders.order_status",
+      "operator": "IN",
+      "value": [
+        "paid",
+        "completed"
+      ]
+    },
+    {
+      "column": "refunds.refund_status",
+      "operator": "EQ",
+      "value": "approved",
+      "scope": "NUMERATOR"
+    }
+  ],
+  "allowed_dimensions": [
+    "orders.region",
+    "channels.channel_name",
+    "channels.channel_type"
+  ],
+  "refund_policy": "AFTER_APPROVED_REFUND",
+  "owner": "OpsLens 合成业务团队"
+}

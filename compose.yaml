@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: opslens_runtime
+      POSTGRES_USER: opslens
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    volumes:
+      - runtime-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U opslens -d opslens_runtime"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+    restart: unless-stopped
+  opslens:
+    build:
+      context: .
+      args:
+        OPSLENS_BUILD_REVISION: ${OPSLENS_BUILD_REVISION:-UNKNOWN}
+    ports:
+      - "127.0.0.1:${OPSLENS_HOST_PORT:-5006}:5006"
+    environment:
+      # A structured URL is built inside the process; reserved password characters are safe.
+      OPSLENS_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      OPSLENS_UI_HOST: 0.0.0.0
+      OPSLENS_UI_PORT: 5006
+      OPSLENS_ALLOWED_WS_ORIGINS: ${OPSLENS_ALLOWED_WS_ORIGINS:-localhost:5006,127.0.0.1:5006}
+      OPSLENS_ANALYSIS_DB: /app/data/demo/generated/opslens_demo.duckdb
+      OPSLENS_DEMO_MODE: "true"
+    volumes:
+      - demo-data:/app/data/demo/generated
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  runtime-data:
+  demo-data:

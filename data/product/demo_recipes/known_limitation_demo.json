@@ -1,0 +1,35 @@
+{
+  "recipe_id": "known_limitation_demo",
+  "title": "Known Limitation: channel_id",
+  "description": "Synthetic demo; paid_at in Asia/Shanghai, [2026-08-01, 2026-09-01). Actual outcome is determined by runtime validation.",
+  "question": "Known Limitation: channel_id",
+  "category": "REVIEW_DEMO",
+  "tags": [
+    "synthetic",
+    "august"
+  ],
+  "runtime_request": {
+    "candidate_sql": "SELECT o.channel_id, SUM(i.quantity * i.unit_price - i.discount_amount) AS gross_gmv FROM orders o JOIN order_items i ON o.order_id = i.order_id WHERE o.order_status IN ('paid', 'completed') AND o.paid_at >= TIMESTAMP '2026-08-01' AND o.paid_at < TIMESTAMP '2026-09-01' GROUP BY o.channel_id",
+    "validation_mode": "METRIC_ANALYSIS",
+    "metric_ref": {
+      "metric_id": "gross_gmv",
+      "version": "1.0",
+      "output_columns": [
+        "gross_gmv"
+      ]
+    },
+    "intent": {
+      "metric_id": "gross_gmv",
+      "metric_version": "1.0",
+      "metric_output_column": "gross_gmv",
+      "time_window": {
+        "start": "2026-08-01T00:00:00",
+        "end": "2026-09-01T00:00:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "dimensions": [
+        "orders.channel_id"
+      ]
+    }
+  }
+}

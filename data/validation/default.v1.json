@@ -1,0 +1,13 @@
+{
+  "policy_id": "opslens_validation",
+  "version": "1.0",
+  "require_complete_evidence_for_metric_pass": true,
+  "require_metric_oracle_for_pass": true,
+  "require_current_registry_match": true,
+  "require_current_corpus_match": true,
+  "require_current_policy_match": true,
+  "require_snapshot_match": true,
+  "allow_deprecated_metrics_by_default": false,
+  "max_report_rows": 20,
+  "ratio_tolerance": 1e-9
+}

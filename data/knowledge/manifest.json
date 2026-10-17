@@ -1,0 +1,88 @@
+{
+  "corpus_version": "1.0",
+  "documents": [
+    {
+      "doc_id": "refund_policy",
+      "title": "退款审批与时间归属政策",
+      "version": "1.0",
+      "status": "ACTIVE",
+      "knowledge_type": "POLICY",
+      "relative_path": "documents/refund_policy.md",
+      "tags": [
+        "退款",
+        "cohort",
+        "approved"
+      ],
+      "metric_ids": [
+        "approved_refund_amount",
+        "net_gmv",
+        "refund_order_rate",
+        "refund_amount_rate"
+      ]
+    },
+    {
+      "doc_id": "order_status_policy",
+      "title": "订单状态与成交政策",
+      "version": "1.0",
+      "status": "ACTIVE",
+      "knowledge_type": "POLICY",
+      "relative_path": "documents/order_status_policy.md",
+      "tags": [
+        "订单",
+        "paid",
+        "completed",
+        "cancelled"
+      ],
+      "metric_ids": [
+        "gross_gmv",
+        "net_gmv",
+        "paid_order_count"
+      ]
+    },
+    {
+      "doc_id": "channel_attribution",
+      "title": "渠道归属与字段说明",
+      "version": "1.0",
+      "status": "ACTIVE",
+      "knowledge_type": "POLICY",
+      "relative_path": "documents/channel_attribution.md",
+      "tags": [
+        "渠道",
+        "affiliate",
+        "social",
+        "direct",
+        "search"
+      ],
+      "metric_ids": []
+    },
+    {
+      "doc_id": "data_dictionary",
+      "title": "合成电商数据字典",
+      "version": "1.0",
+      "status": "ACTIVE",
+      "knowledge_type": "DATA_DICTIONARY",
+      "relative_path": "documents/data_dictionary.md",
+      "tags": [
+        "字段",
+        "schema",
+        "五张业务表"
+      ],
+      "metric_ids": []
+    },
+    {
+      "doc_id": "analysis_guidelines",
+      "title": "分析解释与证据边界",
+      "version": "1.0",
+      "status": "ACTIVE",
+      "knowledge_type": "ANALYSIS_GUIDELINE",
+      "relative_path": "documents/analysis_guidelines.md",
+      "tags": [
+        "因果",
+        "相关性",
+        "证据",
+        "解释"
+      ],
+      "metric_ids": []
+    }
+  ]
+}

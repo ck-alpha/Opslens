@@ -1,0 +1,33 @@
+{
+  "recipe_id": "gross_gmv_august",
+  "title": "August Gross GMV",
+  "description": "Synthetic demo; paid_at in Asia/Shanghai, [2026-08-01, 2026-09-01). Actual outcome is determined by runtime validation.",
+  "question": "August Gross GMV",
+  "category": "VERIFIED_ANALYSIS",
+  "tags": [
+    "synthetic",
+    "august"
+  ],
+  "runtime_request": {
+    "candidate_sql": "SELECT SUM(i.quantity * i.unit_price - i.discount_amount) AS gross_gmv FROM orders o JOIN order_items i ON o.order_id = i.order_id WHERE o.order_status IN ('paid', 'completed') AND o.paid_at >= TIMESTAMP '2026-08-01' AND o.paid_at < TIMESTAMP '2026-09-01'",
+    "validation_mode": "METRIC_ANALYSIS",
+    "metric_ref": {
+      "metric_id": "gross_gmv",
+      "version": "1.0",
+      "output_columns": [
+        "gross_gmv"
+      ]
+    },
+    "intent": {
+      "metric_id": "gross_gmv",
+      "metric_version": "1.0",
+      "metric_output_column": "gross_gmv",
+      "time_window": {
+        "start": "2026-08-01T00:00:00",
+        "end": "2026-09-01T00:00:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "dimensions": []
+    }
+  }
+}

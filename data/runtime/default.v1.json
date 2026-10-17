@@ -1,0 +1,8 @@
+{
+  "runtime_id": "opslens_persistent_runtime",
+  "version": "1.0",
+  "max_step_attempts": 3,
+  "retry_backoff_ms": [0, 100, 500],
+  "advisory_lock_namespace": 7001,
+  "persist_result_rows": true
+}

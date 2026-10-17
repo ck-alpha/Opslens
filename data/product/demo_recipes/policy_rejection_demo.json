@@ -1,0 +1,33 @@
+{
+  "recipe_id": "policy_rejection_demo",
+  "title": "Policy Rejection",
+  "description": "Synthetic demo; paid_at in Asia/Shanghai, [2026-08-01, 2026-09-01). Actual outcome is determined by runtime validation.",
+  "question": "Policy Rejection",
+  "category": "POLICY_DEMO",
+  "tags": [
+    "synthetic",
+    "august"
+  ],
+  "runtime_request": {
+    "candidate_sql": "DELETE FROM orders",
+    "validation_mode": "METRIC_ANALYSIS",
+    "metric_ref": {
+      "metric_id": "gross_gmv",
+      "version": "1.0",
+      "output_columns": [
+        "gross_gmv"
+      ]
+    },
+    "intent": {
+      "metric_id": "gross_gmv",
+      "metric_version": "1.0",
+      "metric_output_column": "gross_gmv",
+      "time_window": {
+        "start": "2026-08-01T00:00:00",
+        "end": "2026-09-01T00:00:00",
+        "timezone": "Asia/Shanghai"
+      },
+      "dimensions": []
+    }
+  }
+}

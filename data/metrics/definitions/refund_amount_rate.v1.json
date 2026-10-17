@@ -1,0 +1,62 @@
+{
+  "metric_id": "refund_amount_rate",
+  "name": "退款金额率",
+  "aliases": [
+    "Refund Amount Rate",
+    "退款率"
+  ],
+  "description": "同一成交订单 cohort 已批准退款金额除以毛 GMV。分母为零时结果为 NULL。",
+  "version": "1.0",
+  "status": "ACTIVE",
+  "metric_type": "DERIVED",
+  "unit": "RATIO",
+  "expression": "approved_refund_amount / gross_gmv",
+  "dependencies": [
+    "approved_refund_amount",
+    "gross_gmv"
+  ],
+  "source_tables": [
+    "order_items",
+    "orders",
+    "refunds"
+  ],
+  "source_columns": [
+    "orders.order_id",
+    "orders.order_status",
+    "orders.paid_at",
+    "order_items.order_id",
+    "order_items.quantity",
+    "order_items.unit_price",
+    "order_items.discount_amount",
+    "refunds.order_id",
+    "refunds.refund_status",
+    "refunds.refund_amount"
+  ],
+  "time_semantics": {
+    "time_column": "orders.paid_at",
+    "timezone": "Asia/Shanghai",
+    "default_grain": "month",
+    "allowed_grains": [
+      "day",
+      "week",
+      "month"
+    ]
+  },
+  "filters": [
+    {
+      "column": "orders.order_status",
+      "operator": "IN",
+      "value": [
+        "paid",
+        "completed"
+      ]
+    }
+  ],
+  "allowed_dimensions": [
+    "orders.region",
+    "channels.channel_name",
+    "channels.channel_type"
+  ],
+  "refund_policy": "AFTER_APPROVED_REFUND",
+  "owner": "OpsLens 合成业务团队"
+}
