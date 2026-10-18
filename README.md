@@ -10,14 +10,14 @@ SQL 能执行，不代表它回答了正确的问题。OpsLens 显式记录指�
 - 基于 SQLGlot 的 SQL 策略检查、DuckDB 只读执行、输出列溯源与证据记录。
 - 根据指标定义和确认的分析范围独立计算参考结果，生成结构化验证报告。
 - PostgreSQL 保存任务、检查点、事件与产物；界面支持历史查询、恢复和重新运行。
-- 可选本地 Ollama 生成候选 SQL；候选仍经过相同治理与验证流程。
+- 可选本地 LLM 或 API 生成候选 SQL；候选仍经过相同治理与验证流程。
 
 ```mermaid
 flowchart TD
     UI[Panel 分析工作台] --> S[ProductService]
     S --> C[指标澄清与业务知识检索]
     C --> I[用户确认分析范围]
-    I --> L[可选 Ollama 候选 SQL]
+    I --> L[可选 LLM 候选 SQL]
     S --> D[演示配方 / 提供的 SQL]
     L --> R[持久运行时]
     D --> R
@@ -34,7 +34,6 @@ flowchart TD
 
 本项目实现指标契约、治理规则、证据与验证流程、持久任务状态及应用界面集成。Lumen 提供向量检索和工具适配等基础能力；Panel 提供交互界面和服务框架。Lumen 的 Planner、SQLAgent 等属于第三方原生能力，当前演示采用显式执行管线，不代表自主规划能力。
 
-技术栈：Python、Lumen、Panel、Pydantic、DuckDB、SQLGlot、PostgreSQL 16、SQLAlchemy、Alembic；验证工具为 Pytest、Ruff、Pyright。Lumen 是固定到 commit 的真实运行依赖，详见 [第三方声明](THIRD_PARTY_NOTICES.md)。
 
 ## 最短运行方式
 
@@ -116,6 +115,5 @@ UI smoke 会在临时本机端口启动真实 Panel 服务。Wheel smoke 在临�
 - 指标计算器仅覆盖支持的指标、维度和 SQL 形式；复杂表达式、`channel_id` 维度等可能进入复核。长结果表的报告展示可能截断。
 - `VERIFIED` 表示通过当前规则及数据范围内的校验，不是任意自然语言问题或数据本身正确性的保证。模型生成失败和验证失败会显式呈现。
 - 检查点可复用成功步骤；被中断的读取可能重新执行，不承诺恰好执行一次。
-- 当前没有认证、RBAC、TLS 或租户隔离，适用于本机演示；不应直接暴露到公网。
 
 项目代码采用 [MIT License](LICENSE)。第三方框架、数据库驱动和其他依赖保留各自许可，参见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
